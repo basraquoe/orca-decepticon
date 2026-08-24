@@ -28,6 +28,7 @@ services:
     container_name: decepticon${DECEPTICON_STACK_NAME:+-${DECEPTICON_STACK_NAME}}-litellm
     volumes:
       - ./config/litellm.yaml:/app/config.yaml:ro
+      - ./config/litellm_dynamic_config.py:/app/litellm_dynamic_config.py:ro
       - ${CLAUDE_CREDENTIALS_VOLUME:-/dev/null}:/root/.claude/.credentials.json
       - ${CODEX_AUTH_VOLUME:-/dev/null}:/root/.codex/auth.json
     entrypoint: ["python", "/app/litellm_startup.py"]
@@ -405,6 +406,7 @@ services:
       # the LiteLLM container's job.
       - ${CLAUDE_CREDENTIALS_VOLUME:-/dev/null}:/root/.claude/.credentials.json:ro
       - ${CODEX_AUTH_VOLUME:-/dev/null}:/root/.codex/auth.json:ro
+      - ./config/llm.py:/app/packages/decepticon-core/decepticon_core/types/llm.py:ro
       # Telemetry identity. The anonymous install_id is minted under
       # $DECEPTICON_HOME/telemetry; without this mount it lived only in the
       # container's writable layer, so every image update minted a NEW id

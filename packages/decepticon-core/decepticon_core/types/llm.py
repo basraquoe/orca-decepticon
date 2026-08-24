@@ -165,6 +165,7 @@ class AuthMethod(StrEnum):
     ZENMUX_API = "zenmux_api"  # ZenMux multi-vendor gateway
     QIANFAN_API = "qianfan_api"  # Baidu Qianfan (ERNIE) v2 OpenAI-compatible
     CLOUDFLARE_GATEWAY_API = "cloudflare_gateway_api"  # Cloudflare AI Gateway
+    ORCAROUTER_API = "orcarouter_api"  # OrcaRouter AI Gateway
 
 
 # ── Tier × AuthMethod → model_id matrix ─────────────────────────────────
@@ -511,6 +512,12 @@ METHOD_MODELS: dict[AuthMethod, dict[Tier, str]] = {
         Tier.HIGH: "cfgateway/anthropic/claude-opus-4-6",
         Tier.MID: "cfgateway/anthropic/claude-sonnet-4-6",
         Tier.LOW: "cfgateway/anthropic/claude-haiku-4-5",
+    },
+    AuthMethod.ORCAROUTER_API: {
+        # OrcaRouter — https://api.orcarouter.ai/v1
+        Tier.HIGH: "orcarouter/anthropic/claude-sonnet-4.6",
+        Tier.MID: "orcarouter/openai/gpt-4o",
+        Tier.LOW: "orcarouter/openai/gpt-4o-mini",
     },
 }
 

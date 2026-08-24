@@ -191,6 +191,7 @@ OPENAI_COMPAT_GATEWAYS: dict[str, tuple[str, str]] = {
     # request time, so an unset base only fails the call (with a clear 404),
     # never proxy startup.
     "cfgateway": ("os.environ/CLOUDFLARE_AI_GATEWAY_API_BASE", "CLOUDFLARE_AI_GATEWAY_API_KEY"),
+    "orcarouter": ("https://api.orcarouter.ai/v1", "ORCAROUTER_API_KEY"),
 }
 
 # Providers that accept SEVERAL key env-var names. Resolved at config-write

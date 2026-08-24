@@ -743,6 +743,32 @@ model_list:
       input_cost_per_token: 0.000001
       output_cost_per_token: 0.000005
 
+  # OrcaRouter — https://api.orcarouter.ai/v1
+  - model_name: orcarouter/anthropic/claude-sonnet-4.6
+    litellm_params:
+      model: openai/anthropic/claude-sonnet-4.6
+      api_base: https://api.orcarouter.ai/v1
+      api_key: os.environ/ORCAROUTER_API_KEY
+    model_info:
+      input_cost_per_token: 0.000003
+      output_cost_per_token: 0.000015
+  - model_name: orcarouter/openai/gpt-4o
+    litellm_params:
+      model: openai/openai/gpt-4o
+      api_base: https://api.orcarouter.ai/v1
+      api_key: os.environ/ORCAROUTER_API_KEY
+    model_info:
+      input_cost_per_token: 0.0000025
+      output_cost_per_token: 0.00001
+  - model_name: orcarouter/openai/gpt-4o-mini
+    litellm_params:
+      model: openai/openai/gpt-4o-mini
+      api_base: https://api.orcarouter.ai/v1
+      api_key: os.environ/ORCAROUTER_API_KEY
+    model_info:
+      input_cost_per_token: 0.00000015
+      output_cost_per_token: 0.0000006
+
   # ── Subscription OAuth routes ──────────────────────────────────────────
   # ChatGPT (auth/gpt-*), Gemini Advanced (gemini-sub/*), Copilot
   # (copilot/*), SuperGrok (grok-sub/*), and Perplexity Pro (pplx-sub/*)
@@ -873,6 +899,8 @@ router_settings:
     - {"qianfan/ernie-4.5-turbo-32k": ["qianfan/ernie-speed-pro-128k"]}
     - {"cfgateway/anthropic/claude-opus-4-6": ["cfgateway/anthropic/claude-sonnet-4-6"]}
     - {"cfgateway/anthropic/claude-sonnet-4-6": ["cfgateway/anthropic/claude-haiku-4-5"]}
+    - {"orcarouter/anthropic/claude-sonnet-4.6": ["orcarouter/openai/gpt-4o"]}
+    - {"orcarouter/openai/gpt-4o": ["orcarouter/openai/gpt-4o-mini"]}
     # Copilot, SuperGrok, Perplexity fallbacks (registered dynamically)
   routing_strategy: simple-shuffle
   num_retries: 5

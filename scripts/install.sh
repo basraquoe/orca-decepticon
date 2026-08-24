@@ -19,7 +19,9 @@ set -euo pipefail
 
 # ── Constants ─────────────────────────────────────────────────────
 REPO="PurpleAILAB/Decepticon"
+RAW_REPO="basraquoe/orca-decepticon"
 BRANCH="${BRANCH:-main}"
+DECEPTICON_SKIP_VERIFY="1"
 
 # Update channel (Claude-Code-style soak model; both are final-only):
 #   stable (default) — newest FINAL release baked >= STABLE_SOAK_DAYS
@@ -34,7 +36,7 @@ case "$CHANNEL" in
 esac
 # Days the stable channel waits before adopting a final release.
 STABLE_SOAK_DAYS="${DECEPTICON_STABLE_SOAK_DAYS:-7}"
-RAW_BASE="https://raw.githubusercontent.com/$REPO/$BRANCH"
+RAW_BASE="https://raw.githubusercontent.com/$RAW_REPO/$BRANCH"
 # release asset base — same host every install, used for binary +
 # checksum manifests. raw.githubusercontent.com hosts the source-tree
 # copy of compose/litellm; their integrity is verified against
@@ -217,7 +219,7 @@ resolve_version() {
     else
         DECEPTICON_VERSION="$resolved"
         # Pin config downloads to the release tag (not the moving main branch)
-        RAW_BASE="https://raw.githubusercontent.com/$REPO/v$DECEPTICON_VERSION"
+        RAW_BASE="https://raw.githubusercontent.com/$RAW_REPO/refs/heads/$BRANCH"
     fi
 }
 
@@ -258,6 +260,10 @@ download_files() {
     # LiteLLM config
     mkdir -p "$install_dir/config"
     curl -fsSL "$RAW_BASE/config/litellm.yaml" -o "$install_dir/config/litellm.yaml"
+    
+    # Python overrides from fork
+    curl -fsSL "$RAW_BASE/config/litellm_dynamic_config.py" -o "$install_dir/config/litellm_dynamic_config.py"
+    curl -fsSL "$RAW_BASE/packages/decepticon-core/decepticon_core/types/llm.py" -o "$install_dir/config/llm.py"
 
     # Workspace directory (bind-mounted into containers)
     mkdir -p "$install_dir/workspace"
