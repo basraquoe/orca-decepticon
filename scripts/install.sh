@@ -263,7 +263,9 @@ download_files() {
     
     # Python overrides from fork
     curl -fsSL "$RAW_BASE/config/litellm_dynamic_config.py" -o "$install_dir/config/litellm_dynamic_config.py"
+    # Core packages Python overrides
     curl -fsSL "$RAW_BASE/packages/decepticon-core/decepticon_core/types/llm.py" -o "$install_dir/config/llm.py"
+    curl -fsSL "$RAW_BASE/packages/decepticon/decepticon/llm/factory.py" -o "$install_dir/config/factory.py"
 
     # Workspace directory (bind-mounted into containers)
     mkdir -p "$install_dir/workspace"

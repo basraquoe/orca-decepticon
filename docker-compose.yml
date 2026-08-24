@@ -407,6 +407,7 @@ services:
       - ${CLAUDE_CREDENTIALS_VOLUME:-/dev/null}:/root/.claude/.credentials.json:ro
       - ${CODEX_AUTH_VOLUME:-/dev/null}:/root/.codex/auth.json:ro
       - ./config/llm.py:/app/packages/decepticon-core/decepticon_core/types/llm.py:ro
+      - ./config/factory.py:/app/packages/decepticon/decepticon/llm/factory.py:ro
       # Telemetry identity. The anonymous install_id is minted under
       # $DECEPTICON_HOME/telemetry; without this mount it lived only in the
       # container's writable layer, so every image update minted a NEW id

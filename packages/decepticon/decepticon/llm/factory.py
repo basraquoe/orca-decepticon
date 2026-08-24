@@ -282,6 +282,7 @@ _API_METHOD_ENV: dict[AuthMethod, str] = {
     AuthMethod.MISTRAL_API: "MISTRAL_API_KEY",
     AuthMethod.OPENROUTER_API: "OPENROUTER_API_KEY",
     AuthMethod.NVIDIA_API: "NVIDIA_API_KEY",
+    AuthMethod.ORCAROUTER_API: "ORCAROUTER_API_KEY",
     # Cloud gateways added in the OpenClaude provider migration. Each
     # routes through LiteLLM's native provider implementation when the
     # corresponding API key is present and not a placeholder.
