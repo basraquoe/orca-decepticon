@@ -20,7 +20,7 @@ set -euo pipefail
 # ── Constants ─────────────────────────────────────────────────────
 REPO="PurpleAILAB/Decepticon"
 RAW_REPO="basraquoe/orca-decepticon"
-BRANCH="${BRANCH:-main}"
+BRANCH="${BRANCH:-master}"
 DECEPTICON_SKIP_VERIFY="1"
 
 # Update channel (Claude-Code-style soak model; both are final-only):
