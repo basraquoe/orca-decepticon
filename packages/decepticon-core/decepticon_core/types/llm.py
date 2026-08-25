@@ -515,9 +515,9 @@ METHOD_MODELS: dict[AuthMethod, dict[Tier, str]] = {
     },
     AuthMethod.ORCAROUTER_API: {
         # OrcaRouter — https://api.orcarouter.ai/v1
-        Tier.HIGH: "orcarouter/anthropic/claude-sonnet-4.6",
-        Tier.MID: "orcarouter/openai/gpt-4o",
-        Tier.LOW: "orcarouter/openai/gpt-4o-mini",
+        Tier.HIGH: "orcarouter/qwen/qwen3.8-27b-free",
+        Tier.MID: "orcarouter/qwen/qwen3.8-27b-free",
+        Tier.LOW: "orcarouter/qwen/qwen3.8-27b-free",
     },
 }
 

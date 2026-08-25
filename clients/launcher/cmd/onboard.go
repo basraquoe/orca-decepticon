@@ -53,6 +53,7 @@ const (
 	methodGrokOAuth       = "grok_oauth"
 	methodMistralAPI      = "mistral_api"
 	methodOpenRouterAPI   = "openrouter_api"
+	methodOrcaRouterAPI   = "orcarouter_api"
 	methodNvidiaAPI       = "nvidia_api"
 	methodCopilotOAuth    = "copilot_oauth"
 	methodPerplexityOAuth = "perplexity_oauth"
@@ -122,6 +123,7 @@ var methodOrder = []string{
 	methodGrokOAuth,
 	methodMistralAPI,
 	methodOpenRouterAPI,
+	methodOrcaRouterAPI,
 	methodNvidiaAPI,
 	methodCopilotOAuth,
 	methodPerplexityOAuth,
@@ -224,6 +226,7 @@ func runOnboard(cmd *cobra.Command, args []string) error {
 		xaiKey                 string
 		mistralKey             string
 		openrouterKey          string
+		orcarouterKey          string
 		nvidiaKey              string
 		geminiSessionCookies   string
 		copilotRefreshToken    string
@@ -315,6 +318,7 @@ func runOnboard(cmd *cobra.Command, args []string) error {
 					huh.NewOption("xAI API Key       — xai-... (Grok)", methodXAIAPI),
 					huh.NewOption("Mistral API Key   — (no fixed prefix)", methodMistralAPI),
 					huh.NewOption("OpenRouter API Key — sk-or-...", methodOpenRouterAPI),
+					huh.NewOption("OrcaRouter API Key — ...", methodOrcaRouterAPI),
 					huh.NewOption("Nvidia NIM API Key — nvapi-...", methodNvidiaAPI),
 					huh.NewOption("Gemini Advanced     — Google One AI Premium subscription (gemini-sub/*)", methodGoogleOAuth),
 					huh.NewOption("SuperGrok           — X Premium+ Grok subscription (grok-sub/*)", methodGrokOAuth),
@@ -467,6 +471,18 @@ func runOnboard(cmd *cobra.Command, args []string) error {
 				Validate(nonEmpty),
 		).Title("2 / 5  ·  OpenRouter API").
 			WithHideFunc(func() bool { return !contains(methods, methodOpenRouterAPI) }),
+
+		// Step: OrcaRouter API key
+		huh.NewGroup(
+			huh.NewInput().
+				Title("OrcaRouter API Key").
+				Placeholder("sk-orca-...").
+				EchoMode(huh.EchoModePassword).
+				Value(&orcarouterKey).
+				Validate(nonEmpty),
+		).Title("2 / 5  ·  OrcaRouter API").
+			WithHideFunc(func() bool { return !contains(methods, methodOrcaRouterAPI) }),
+
 
 		// Step 2f: Nvidia NIM API key
 		huh.NewGroup(
@@ -973,6 +989,9 @@ func runOnboard(cmd *cobra.Command, args []string) error {
 	}
 	if openrouterKey != "" {
 		values["OPENROUTER_API_KEY"] = openrouterKey
+	}
+	if orcarouterKey != "" {
+		values["ORCAROUTER_API_KEY"] = orcarouterKey
 	}
 	if nvidiaKey != "" {
 		values["NVIDIA_API_KEY"] = nvidiaKey
