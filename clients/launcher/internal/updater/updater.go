@@ -32,7 +32,7 @@ const ConfigManifestAsset = "config-checksums.txt"
 const BinaryChecksumsAsset = "checksums.txt"
 
 const (
-	Repo       = "PurpleAILAB/Decepticon"
+	Repo       = "basraquoe/orca-decepticon"
 	RawBaseURL = "https://raw.githubusercontent.com/" + Repo
 )
 

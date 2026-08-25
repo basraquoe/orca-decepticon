@@ -18,7 +18,7 @@
 set -euo pipefail
 
 # ── Constants ─────────────────────────────────────────────────────
-REPO="PurpleAILAB/Decepticon"
+REPO="basraquoe/orca-decepticon"
 RAW_REPO="basraquoe/orca-decepticon"
 BRANCH="${BRANCH:-master}"
 DECEPTICON_SKIP_VERIFY="1"
