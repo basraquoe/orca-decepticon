@@ -78,6 +78,19 @@ def _read_override(request: Any, role: str | None = None) -> str:
         value = container.get("model_override", "")
         return value.strip() if isinstance(value, str) and value.strip() else ""
 
+    try:
+        from langgraph.config import get_config
+
+        cfg = get_config()
+        if isinstance(cfg, dict):
+            configurable = cfg.get("configurable")
+            if isinstance(configurable, dict):
+                picked = _pick(configurable)
+                if picked:
+                    return picked
+    except Exception:
+        pass
+
     runtime = getattr(request, "runtime", None)
     if runtime is not None:
         ctx = getattr(runtime, "context", None) or {}

@@ -218,14 +218,25 @@ class TestReadOverride:
     """
 
     def test_runtime_context_takes_priority(self) -> None:
-        class _Runtime:
-            context = {"model_override": "openai/gpt-5.5"}
-
         class _Req:
-            runtime = _Runtime()
+            class runtime:
+                context = {"model_override": "openai/gpt-5.5"}
+
             state = {"model_override": "openai/gpt-5.4"}
 
         assert _read_override(_Req()) == "openai/gpt-5.5"
+
+    def test_configurable_from_get_config(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        monkeypatch.setattr(
+            "langgraph.config.get_config",
+            lambda: {"configurable": {"model_override": "orcarouter/tencent/hy3-free"}},
+        )
+
+        class _Req:
+            runtime = None
+            state = {}
+
+        assert _read_override(_Req()) == "orcarouter/tencent/hy3-free"
 
     def test_state_used_when_runtime_absent(self) -> None:
         class _Req:
