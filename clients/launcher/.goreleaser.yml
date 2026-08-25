@@ -36,8 +36,8 @@ checksum:
 
 release:
   github:
-    owner: PurpleAILAB
-    name: Decepticon
+    owner: basraquoe
+    name: orca-decepticon
   # Publish as draft so the GitHub `releases/latest` endpoint (used by the
   # launcher's update notice and explicit `decepticon update`) does NOT see
   # this version until every Docker image is verified on GHCR. The publish-release job in

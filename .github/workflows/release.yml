@@ -24,6 +24,7 @@ jobs:
   # See: https://docs.pypi.org/trusted-publishers/
   publish-pypi:
     name: Publish three workspace wheels to PyPI
+    if: github.repository == 'PurpleAILAB/Decepticon'
     runs-on: ubuntu-latest
     environment: pypi-release
     permissions:
