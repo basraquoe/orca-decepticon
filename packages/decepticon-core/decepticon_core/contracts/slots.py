@@ -136,6 +136,7 @@ plugin can't silently subvert the safety story.
 # is a no-op otherwise, so OSS / single-tenant runs are unaffected.
 _TAIL_SLOTS: frozenset[MiddlewareSlot] = frozenset(
     {
+        MiddlewareSlot.MODEL_OVERRIDE,
         MiddlewareSlot.MODEL_FALLBACK,
         MiddlewareSlot.PROXY_KEY_OVERRIDE,
         MiddlewareSlot.SUMMARIZATION,
